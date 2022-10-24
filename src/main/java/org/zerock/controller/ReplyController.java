@@ -31,7 +31,7 @@ public class ReplyController {
 	
 	
 	@PostMapping(value = "/new",
-			consumes = "appication/json",
+			consumes = "application/json",
 			produces = {MediaType.TEXT_PLAIN_VALUE } )
 	public ResponseEntity<String> create(@RequestBody ReplyVO vo){
 		
@@ -43,7 +43,7 @@ public class ReplyController {
 		log.info("Reply INSERT COUNT : " + insertCount);
 		
 		return insertCount == 1
-			? new ResponseEntity<>("succes",HttpStatus.OK)
+			? new ResponseEntity<>("success",HttpStatus.OK)
 			:new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 	

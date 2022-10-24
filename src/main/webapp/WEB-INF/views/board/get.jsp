@@ -49,21 +49,62 @@
                        <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}" />'>
                        <input type='hidden' name='type' value='<c:out value="${cri.type}" />'>
                      </form>
+                     
+                
                  
            </div>
+           
+           
+           
         </div>
+        
+             <div class = 'row'>
+                     <div class = "col-lg-12">
+                     
+                     <div class = "panel panel-default">
+                     
+                     <div class = "panel-heading">
+                     
+                     <i class = "fa fa-comments fa-fw"></i> Reply
+                     
+                     </div>
+                     <div class ="panel-body">
+                     <ul class ="chat">
+                     <li class = "left clearfix" data-rno='12'>
+                     <div>
+                     <div class="header">
+                     <strong class = "primary-font">user00</strong>
+                     <small class = "pull-right text-muted">2018-01-01 13:13</small>
+                     
+                     </div>
+                     <p>Goot job!!</p>
+                     </div>
+                     
+                     </li>
+                     </ul>
+                     
+                     </div>
+                     
+                     
+                     </div>
+                     
+                     </div>
+                     
+                     </div>
      </div>
   </div>
+  
+
+  
+  
+  
+  
+  
   
   <script type = "text/javascript" src = "/resources/js/reply.js"></script>
   
   
-  <script>
-  $(document).ready (function(){
-	  console.log(replyService);
-  });
-  
-  </script>
+
   
   <script type = "text/javascript">
   
@@ -73,20 +114,72 @@
 	  
 	  var bnoValue = '<c:out value = "${board.bno}"/>';
 	  
+	  
+	  replyService.getList({bno:bnoValue, page:1}, function(list){
+		for(var i = 0, len = list.length||0; i<len;i++){
+			console.log(list[i]);
+			
+		}
+	  });
+	  
+	  
+	  /*
 	  replyService.add(
 			  {reply:"JS Test",replyer:"tester",bno:bnoValue}
 	  ,
 	  function(result){
 		  alert("RESULT: " + result);
 		  }
-  );
+  );*/
   </script>
+  
+  <!--   삭제 처리
+  <script type = "text/javascript">
+  replyService.remove(43,function(count){
+	  console.log(count);
+	  
+	  if(count==="success"){
+		  alert("REMOVED");
+	  }
+	  
+  },function(err){
+	  
+	  alert('ERROR...');
+  });
+  </script>
+  -->
+  
+  
+  <script type = "text/javascript">
+  replyService.update({
+	rno:46,
+	bno:bnoValue,
+	reply:"Modifyed Reply....."
+  },
+  function(result){
+	  alert("수정 완료...");
+  
+  })
+  
+</script>
+  
+  
+<script type="text/javascript">
+replyService.get(51,function(data){
+	console.log(data);
+})
+
+</script>
+  
+  
+  
+  
   
   
   <script type="text/javascript">
     $(document).ready(function() {
     	var operForm = $("#operForm");
-    	
+    })
     	$("button[data-oper='modify']").on("click", function(e) {
     		operForm.attr("action", "/board/modify").submit();
     	});
@@ -96,6 +189,6 @@
     		operForm.attr("action", "/board/list");
     		operForm.submit();
     	});
-    });
+  
   </script>
 <%@ include file="../includes/footer.jsp"  %>
