@@ -74,6 +74,22 @@ public class ReplyMapperTests {
 	}
 	
 	
+	
+	
+	@Test
+	public void testList2() {
+		Criteria cri = new Criteria (2,10);
+		log.info("98***********************************************************************************************************************");
+		List<ReplyVO> replies = mapper.getListWithPaging(cri,142L );
+		
+		replies.forEach(reply -> log.info(reply.toString()));
+		
+		
+		
+		
+	}
+	
+	
 	@Test
 	public void testUpdate() {
 		Long targetRno = 10L;

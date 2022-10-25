@@ -39,7 +39,9 @@ var replyService = (function(){
 		$.getJSON("/replies/pages/" + bno + "/" + page + ".json",
 		function(data){
 			if(callback){
-				callback(data);
+				//callback(data);
+				callback(data.replyCnt,data.list);
+				
 			}
 		}).fail(function(xhr ,status,err){
 			if(error){
@@ -118,7 +120,13 @@ var replyService = (function(){
 		var gap = today.getTime() - timeValue;
 		var dateObj = new Date(timeValue);
 		var str = "";
-
+		
+		console.log("( ");
+		console.log("getTime : " +today.getTime());
+		console.log("timeValue : " + timeValue);	
+		
+		console.log("gap(getTime - timeValue) : " + gap);
+		console.log(")");
 		
 		
 		if (gap <(1000*60*60*24)){
@@ -137,7 +145,7 @@ var replyService = (function(){
 		} else{
 			
 			var yy = dateObj.getFullYear();
-			var mm = dateObj.getMinutes();
+			var mm = dateObj.getMonth()+ 1 ;
 			var dd = dateObj.getDate();
 			
 			return [yy , '/' , (mm>9? '': '0') + mm, '/', (dd>9? '':'0') +dd ].join('');
